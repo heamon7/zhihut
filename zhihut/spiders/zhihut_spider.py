@@ -25,7 +25,7 @@ class ZhihutSpider(scrapy.Spider):
 
         requestUrls =[]
         startUrl = self.start_urls[0]
-        for index in reversed(range(rootTopicPageNum-5,rootTopicPageNum+1)):
+        for index in reversed(range(0,rootTopicPageNum+1)):
             page = startUrl + "?page=" + str(index)
             requestUrls.append(page)
 
