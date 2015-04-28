@@ -10,6 +10,8 @@ import json
 import leancloud
 from leancloud import Object
 from leancloud import LeanCloudError
+from leancloud import Query
+from scrapy import log
 
 class FirstPipline(object):
 
@@ -20,18 +22,21 @@ class FirstPipline(object):
     def process_item(self, item, spider):
         Question= Object.extend('Question')
         question = Question()
-        question.set('answerCount',item['answerCount'])
-        question.set('isTopQuestion',item['isTopQuestion'])
-        question.set('subTopicName',item['subTopicName'])
-        question.set('subTopicHref',item['subTopicHref'])
-        question.set('questionTimestamp',item['questionTimestamp'])
-        question.set('questionLinkHref',item['questionLinkHref'])
-        question.set('questionName',item['questionName'])
-
-        # question.set('',item[''])
-
+        query = Query(Question)
         try:
-            question.save()
+            query.equal_to('questionLinkHref',item['questionLinkHref'])
+
+            if not query.find():
+                question.set('answerCount',item['answerCount'])
+                question.set('isTopQuestion',item['isTopQuestion'])
+                question.set('subTopicName',item['subTopicName'])
+                question.set('subTopicHref',item['subTopicHref'])
+                question.set('questionTimestamp',item['questionTimestamp'])
+                question.set('questionLinkHref',item['questionLinkHref'])
+                question.set('questionName',item['questionName'])
+                question.save()
+            else:
+                log.msg("Question existed: "+item['questionLinkHref'],level=log.INFO)
         except LeanCloudError,e:
             print e
         finally:
