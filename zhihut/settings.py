@@ -17,6 +17,6 @@ NEWSPIDER_MODULE = 'zhihut.spiders'
 #USER_AGENT = 'zhihut (+http://www.yourdomain.com)'
 
 ITEM_PIPELINES = {
-    'zhihut.pipelines.FirstPipline': 300,
-   # 'zhihut.pipelines.SecondPipline': 800,
+    'zhihut.pipelines.FirstPipeline': 300,
+   'zhihut.pipelines.SecondPipeline': 800,
 }

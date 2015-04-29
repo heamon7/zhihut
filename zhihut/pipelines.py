@@ -12,9 +12,10 @@ from leancloud import LeanCloudError
 from leancloud import Query
 from scrapy import log
 
-class FirstPipline(object):
+class FirstPipeline(object):
 
     def __init__(self):
+    	pass
         leancloud.init('jlxrio7ls1fdx9oyapnsw7djov681i6jf1omoxiyqcdqm65t', master_key='xxmihbxc73mw06smcjnrqhvcdenam1ahg4hbxsjdqhsdqkty')
         #self.file = open('items.jl', 'wb')
 
@@ -39,7 +40,7 @@ class FirstPipline(object):
         except LeanCloudError,e:
             print e
         finally:
-            return item
+        	return item
 
 
 
@@ -49,6 +50,6 @@ class FirstPipline(object):
         # self.file.write(line)
         # return item
 
-# class SecondPipline(object):
-#     def process_item(self, item, spider):
-#         return item
+class SecondPipeline(object):
+    def process_item(self, item, spider):
+        return item
