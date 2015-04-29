@@ -25,7 +25,7 @@ class ZhihutSpider(scrapy.Spider):
 
         requestUrls =[]
         startUrl = self.start_urls[0]
-        for index in reversed(range(0,rootTopicPageNum+1)):
+        for index in reversed(range(rootTopicPageNum-1,rootTopicPageNum+1)):
             page = startUrl + "?page=" + str(index)
             requestUrls.append(page)
 
@@ -36,7 +36,7 @@ class ZhihutSpider(scrapy.Spider):
     def parsePage(self,response):
         item = ZhihutItem()
         for sel in response.xpath('//div[@id="zh-topic-questions-list"]//div[@itemprop="question"]'):
-            item['answerCount'] = sel.xpath('meta[@itemprop="answerCount"]/@content').extract()[0]
+            item['answerCount'] = int(sel.xpath('meta[@itemprop="answerCount"]/@content').extract()[0])
             item['isTopQuestion'] = sel.xpath('meta[@itemprop="isTopQuestion"]/@content').extract()[0]
             item['questionTimestamp'] = sel.xpath('h2[@class="question-item-title"]/span[@class="time"]/@data-timestamp').extract()[0]
             item['questionLinkHref'] = sel.xpath('h2[@class="question-item-title"]/a[@class="question_link"]/@href').extract()[0]

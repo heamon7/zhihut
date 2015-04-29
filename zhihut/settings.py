@@ -18,5 +18,5 @@ NEWSPIDER_MODULE = 'zhihut.spiders'
 
 ITEM_PIPELINES = {
     'zhihut.pipelines.FirstPipline': 300,
-    'zhihut.pipelines.SecondPipline': 800,
+   # 'zhihut.pipelines.SecondPipline': 800,
 }

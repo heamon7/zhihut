@@ -6,7 +6,6 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 
-import json
 import leancloud
 from leancloud import Object
 from leancloud import LeanCloudError
@@ -20,9 +19,9 @@ class FirstPipline(object):
         #self.file = open('items.jl', 'wb')
 
     def process_item(self, item, spider):
-        Question= Object.extend('Question')
-        question = Question()
-        query = Query(Question)
+        Questions = Object.extend('Questions')
+        question = Questions()
+        query = Query(Questions)
         try:
             query.equal_to('questionLinkHref',item['questionLinkHref'])
 
@@ -50,6 +49,6 @@ class FirstPipline(object):
         # self.file.write(line)
         # return item
 
-class SecondPipline(object):
-    def process_item(self, item, spider):
-        return item
+# class SecondPipline(object):
+#     def process_item(self, item, spider):
+#         return item
